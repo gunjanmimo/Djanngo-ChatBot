@@ -15,7 +15,7 @@ warnings.filterwarnings('ignore')
 
 # ? get article
 article = Article(
-    'https://www.mayoclinic.org/diseases-conditions/chronic-kidney-disease/symptoms-causes/syc-20354521')
+    'https://www.mayoclinic.org/diseases-conditions/coronavirus/symptoms-causes/syc-20479963')
 article.download()
 article.parse()
 article.nlp()
@@ -96,22 +96,22 @@ def getResponse(request):
         msg = request.POST.get('message')
     # start the chat
     # print("Doc Bot: I am a doctor bot. I will answer your questions. If want to exit, type BYE")
-    response = "Doc Bot: I am a doctor bot. I will answer your questions. If want to exit, type BYE"
+    response = "I am a doctor bot. I will answer your questions. If want to exit, type BYE"
 
     exit_list = ['exit', 'see you later', 'break', 'quit', 'bye']
 
     user_input = msg
     if user_input.lower() in exit_list:
         # print("Doc BOt: Thank you for using me")
-        response = "Doc BOt: Thank you for using me"
+        response = "Thank you for using me"
         # break
     else:
         if greeting_response(user_input) != None:
-            # print("Doc Bot: "+greeting_response(user_input))
-            response = "Doc Bot: "+greeting_response(user_input)
+            # print(greeting_response(user_input))
+            response = greeting_response(user_input)
         else:
-            # print("Doc Bot: "+bot_response(user_input))
-            response = "Doc Bot: "+bot_response(user_input)
+            # print(bot_response(user_input))
+            response = bot_response(user_input)
 
     context = {'a': response}
     return render(request, 'chat.html', context)
