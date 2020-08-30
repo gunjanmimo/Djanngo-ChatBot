@@ -2,62 +2,80 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Chat Bot</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChatBot</title>
     <style>
-        .main-area {
+        body {
+            background: linear-gradient(to left top, #22132e, #000) fixed;
+        }
+        
+        div {
+            margin: auto;
             position: relative;
-            left: 30%;
-            top: 50%;
+            top: 200px;
+            width: 40%;
+        }
+        
+        #form {
+            width: 400px;
+            padding: 10px;
+            font-size: 18px;
+            outline: none;
+            background: linear-gradient(to left top, #000, #22132e) fixed;
+            border-radius: 10px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            color: rgba(255, 255, 255, 0.8);
+            transition: all 0.5s;
+        }
+        
+        #form:hover {
+            border: 2px solid rgba(255, 255, 255, 0.5);
+        }
+        
+        #form:focus {
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            background: linear-gradient(to left top, #000, #4e2d69) fixed;
+        }
+        
+        #button {
+            width: 425px;
+            padding: 10px;
+            margin-top: 10px;
+            font-size: 15px;
+            font-weight: bold;
+            outline: none;
+            background: linear-gradient(to left top, #000, #4e2d69) fixed;
+            border-radius: 10px;
+            border: 5px solid rgba(255, 255, 255, 0.2);
+            color: rgba(255, 255, 255, 0.8);
+            transition: all 0.5s;
+        }
+        
+        #button:hover {
+            border: 5px solid rgba(255, 255, 255, 0.5);
+            background: linear-gradient(to left top, #000, #8b5db0) fixed;
+        }
+        
+        #button:focus {
+            background: linear-gradient(to left top, #8b5db0, #000) fixed;
         }
     </style>
 </head>
 
 <body>
-    <div class="main-area">
-        <div class="chat-area" id="message-box"></div>
-        <div>
-            <form action="getResponse" method="post">
-                {% csrf_token %}
-                <input class="input-message" name="message" type="text" id="message" />
-                <input type="button" value="Send" onclick="send()" />
-            </form>
-        </div>
+    <div class="bot-response">
+        <h1 style="color: white;"><strong>BOT:</strong> {{a}}</h1>
     </div>
+    <div class="main-body">
 
-    <script>
-        var running = false;
+        <form action="getResponse" method="post">
+            {% csrf_token %}
+            <input type="text" id="form" name="message" placeholder="message">
 
-        function send() {
-            if (running == true) return;
-            var msg = document.getElementById("message").value;
-            if (msg == "") return;
-            running = true;
-            addMsg(msg);
-            window.setTimeout(addResponseMsg, 1000, msg);
-            console.log("the button is clicked");
-        }
-
-        function addMsg(msg) {
-            var div = document.createElement("div");
-            div.innerHTML =
-                "<span style='flex-grow:1;'></span><div class='chat-message'>" +
-                msg +
-                " :Me" +
-                "</div>";
-            div.className = "chat-message-div";
-            document.getElementById("message-box").appendChild(div);
-        }
-
-        function addResponseMsg(msg) {
-            var div = document.createElement("div");
-            div.innerHTML = "<div class='chat-message'>" + "Bot " + msg + "</div>"; // this is to add the response
-            div.className = "chat-message-div";
-            document.getElementById("message-box").appendChild(div);
-            running = false;
-        }
-    </script>
+            <input type="submit" id="button" value="Enter">
+        </form>
+    </div>
 </body>
 
 </html>
