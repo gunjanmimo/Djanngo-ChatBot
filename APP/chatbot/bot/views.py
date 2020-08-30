@@ -87,7 +87,7 @@ def bot_response(user_input):
 
 
 def index(request):
-    context = {'a': 'hello world'}
+    context = {'a': "Hi I am ChatBot"}
     return render(request, 'chat.html', context)
 
 
@@ -95,19 +95,23 @@ def getResponse(request):
     if request.method == 'POST':
         msg = request.POST.get('message')
     # start the chat
-    print("Doc Bot: I am a doctor bot. I will answer your questions. If want to exit, type BYE")
+    # print("Doc Bot: I am a doctor bot. I will answer your questions. If want to exit, type BYE")
+    response = "Doc Bot: I am a doctor bot. I will answer your questions. If want to exit, type BYE"
 
     exit_list = ['exit', 'see you later', 'break', 'quit', 'bye']
-    while(True):
-        user_input = input()
-        if user_input.lower() in exit_list:
-            print("Doc BOt: Thank you for using me")
-            break
-        else:
-            if greeting_response(user_input) != None:
-                print("Doc Bot: "+greeting_response(user_input))
-            else:
-                print("Doc Bot: "+bot_response(user_input))
 
-    context = {'a': msg}
+    user_input = msg
+    if user_input.lower() in exit_list:
+        # print("Doc BOt: Thank you for using me")
+        response = "Doc BOt: Thank you for using me"
+        # break
+    else:
+        if greeting_response(user_input) != None:
+            # print("Doc Bot: "+greeting_response(user_input))
+            response = "Doc Bot: "+greeting_response(user_input)
+        else:
+            # print("Doc Bot: "+bot_response(user_input))
+            response = "Doc Bot: "+bot_response(user_input)
+
+    context = {'a': response}
     return render(request, 'chat.html', context)
