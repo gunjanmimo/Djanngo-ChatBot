@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chat Bot</title>
+    <style>
+        .main-area {
+            position: relative;
+            left: 30%;
+            top: 50%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main-area">
+        <div class="chat-area" id="message-box"></div>
+        <div>
+            <form action="getResponse" method="post">
+                {% csrf_token %}
+                <input class="input-message" name="message" type="text" id="message" />
+                <input type="button" value="Send" onclick="send()" />
+            </form>
+        </div>
+    </div>
+
+    <script>
+        var running = false;
+
+        function send() {
+            if (running == true) return;
+            var msg = document.getElementById("message").value;
+            if (msg == "") return;
+            running = true;
+            addMsg(msg);
+            window.setTimeout(addResponseMsg, 1000, msg);
+            console.log("the button is clicked");
+        }
+
+        function addMsg(msg) {
+            var div = document.createElement("div");
+            div.innerHTML =
+                "<span style='flex-grow:1;'></span><div class='chat-message'>" +
+                msg +
+                " :Me" +
+                "</div>";
+            div.className = "chat-message-div";
+            document.getElementById("message-box").appendChild(div);
+        }
+
+        function addResponseMsg(msg) {
+            var div = document.createElement("div");
+            div.innerHTML = "<div class='chat-message'>" + "Bot " + msg + "</div>"; // this is to add the response
+            div.className = "chat-message-div";
+            document.getElementById("message-box").appendChild(div);
+            running = false;
+        }
+    </script>
+</body>
+
+</html>

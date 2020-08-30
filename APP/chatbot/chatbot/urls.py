@@ -20,5 +20,6 @@ from bot import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     url('^$', views.index, name="chatbot"),
+    url('getResponse', views.getResponse, name='getResponse'),
 
 ]

@@ -5,4 +5,14 @@ from django.http import HttpResponse
 
 def index(request):
     context = {'a': 'hello world'}
-    return render(request, 'index.html', context)
+    return render(request, 'chat.html', context)
+
+
+def getResponse(request):
+    if request.method == 'POST':
+        print(" this is a post method")
+        msg = request.POST.get('message')
+        print(msg)
+
+    context = {'a': 'hello world'}
+    return render(request, 'chat.html', context)

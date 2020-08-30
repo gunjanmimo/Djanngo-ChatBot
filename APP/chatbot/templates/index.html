@@ -2,8 +2,8 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="https://support.upwork.com/hc/article_attachments/360040474034/chatbot-data.png" type="image/x-icon" />
 
     <title>ChatBOT</title>
@@ -37,7 +37,7 @@
         
         .main-title svg {
             height: 16px;
-            margin: 0px 8px
+            margin: 0px 8px;
         }
         
         .chat-area {
@@ -143,57 +143,62 @@
 
 <body>
     <div class="main-card">
-        <div class="main-title"><svg viewBox="0 0 24 24">
-                <path fill="currentColor"
-                    d="M12,2A2,2 0 0,1 14,4C14,4.74 13.6,5.39 13,5.73V7H14A7,7 0 0,1 21,14H22A1,1 0 0,1 23,15V18A1,1 0 0,1 22,19H21V20A2,2 0 0,1 19,22H5A2,2 0 0,1 3,20V19H2A1,1 0 0,1 1,18V15A1,1 0 0,1 2,14H3A7,7 0 0,1 10,7H11V5.73C10.4,5.39 10,4.74 10,4A2,2 0 0,1 12,2M7.5,13A2.5,2.5 0 0,0 5,15.5A2.5,2.5 0 0,0 7.5,18A2.5,2.5 0 0,0 10,15.5A2.5,2.5 0 0,0 7.5,13M16.5,13A2.5,2.5 0 0,0 14,15.5A2.5,2.5 0 0,0 16.5,18A2.5,2.5 0 0,0 19,15.5A2.5,2.5 0 0,0 16.5,13Z" />
-            </svg><span>Chatbot</span></div>
-        <div class="chat-area" id="message-box">
-        </div>
-        <div class="input-div">
-            <input class="input-message" name="message" type="text" id="message" />
-            <button class="input-send" onclick="send()">
-                <svg style="width:24px;height:24px">
-                    <path d="M2,21L23,12L2,3V10L17,12L2,14V21Z" />
-                </svg>
+        <div class="main-title">
+            <svg viewBox="0 0 24 24">
+          <path
+            fill="currentColor"
+            d="M12,2A2,2 0 0,1 14,4C14,4.74 13.6,5.39 13,5.73V7H14A7,7 0 0,1 21,14H22A1,1 0 0,1 23,15V18A1,1 0 0,1 22,19H21V20A2,2 0 0,1 19,22H5A2,2 0 0,1 3,20V19H2A1,1 0 0,1 1,18V15A1,1 0 0,1 2,14H3A7,7 0 0,1 10,7H11V5.73C10.4,5.39 10,4.74 10,4A2,2 0 0,1 12,2M7.5,13A2.5,2.5 0 0,0 5,15.5A2.5,2.5 0 0,0 7.5,18A2.5,2.5 0 0,0 10,15.5A2.5,2.5 0 0,0 7.5,13M16.5,13A2.5,2.5 0 0,0 14,15.5A2.5,2.5 0 0,0 16.5,18A2.5,2.5 0 0,0 19,15.5A2.5,2.5 0 0,0 16.5,13Z"
+          /></svg
+        ><span>Chatbot</span>
+      </div>
+      <div class="chat-area" id="message-box"></div>
+      <div class="input-div">
+        <input class="input-message" name="message" type="text" id="message" />
+        <button class="input-send" onclick="send()">
+          <svg style="width: 24px; height: 24px">
+            <path d="M2,21L23,12L2,3V10L17,12L2,14V21Z" />
+          </svg>
             </button>
         </div>
     </div>
     <script>
-        var running = false
+        var running = false;
 
         function send() {
-            if (running == true)
-                return
-            var msg = document.getElementById("message").value
-            if (msg == "")
-                return
-            running = true
-            addMsg(msg)
-            window.setTimeout(addResponseMsg, 1000, msg)
+            if (running == true) return;
+            var msg = document.getElementById("message").value;
+            if (msg == "") return;
+            running = true;
+            addMsg(msg);
+            window.setTimeout(addResponseMsg, 1000, msg);
         }
 
         function addMsg(msg) {
             var div = document.createElement("div");
-            div.innerHTML = "<span style='flex-grow:1'></span><div class='chat-message'>" + msg + "</div>"
-            div.className = "chat-message-div"
-            document.getElementById("message-box").appendChild(div)
+            div.innerHTML =
+                "<span style='flex-grow:1'></span><div class='chat-message'>" +
+                msg +
+                "</div>";
+            div.className = "chat-message-div";
+            document.getElementById("message-box").appendChild(div);
         }
 
         function addResponseMsg(msg) {
             var div = document.createElement("div");
-            div.innerHTML = "<div class='chat-message'>" + msg + "</div>"
-            div.className = "chat-message-div"
-            document.getElementById("message-box").appendChild(div)
-            running = false
+            div.innerHTML = "<div class='chat-message'>" + msg + "</div>"; // this is to add the response
+            div.className = "chat-message-div";
+            document.getElementById("message-box").appendChild(div);
+            running = false;
         }
-        document.getElementById("message").addEventListener("keyup", function(event) {
-            if (event.keyCode === 13) {
-                event.preventDefault();
-                send()
-            }
-        });
+        document
+            .getElementById("message")
+            .addEventListener("keyup", function(event) {
+                if (event.keyCode === 13) {
+                    event.preventDefault();
+                    send();
+                }
+            });
     </script>
-
 </body>
 
 </html>
